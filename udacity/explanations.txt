@@ -1,0 +1,58 @@
+Question 1
+
+To solve this problem I tended to use simplest approach possible. Python has
+built-in operator 'in' which checks presence of some subsequence in sequence.
+
+I assume that complexity of operation performed with this operator should not
+be more than O(n). Space complexity is O(1) because no new memory is consumed. 
+
+Question 2
+
+The approach applied here is to check if a given letter repeats somewhere in
+the string. If yes, check if substring including starting and ending letters
+is palindrome. If not, move to the next letter and repeat. If palindrome is
+found, then search of the next one is started from point where found palindrome
+ends.
+
+Time complexity is O(n) if input does not contain any palindrome or input
+is a palindrome. If there multiple palindromes in input then complexity could
+possibly strive to O(2 * n) but it is still linear. Space complexity is also
+O(n) because list to store palindrome and string to build it up again are
+introduced. 
+
+Question 3
+To find minimal spanning tree Kruskal's algorithm was implemented. Special data
+structure named DisjointSets was introduced. To solve the problem edges of the
+graph should be sorted by weight incrementally. Vertices should be put in
+DisjoinedSets (every vertex in its own set). Then, list of edges should be iterated
+and edges be checked to form a loop. If edge does not form a loop, then sets
+their vertices belong to can be joined.
+
+Complexity of this algorithm is in general O(V + E) where V is number of vertices
+and E is number of edges. However it depends on implementation of data structure
+for finding loops. Here a simple implementation of DisjoinedSets is used so in
+the worst case complexity can be O(V^2 + E). Space complexity is O(V + E) because
+all vertices and some part of edges are copied to resulting tree.
+
+Question 4
+The tree is represented as matrix here and looking up for parents of nodes is
+extremely simple. However moving by the tree requires additional lookups and
+that is why complexity of the algorithm is quadratic in the worst case, when it
+is required to move from the very bottom of the tree to the root.
+
+Complexity of this algorithm is near quadratic, O(V^2) because multiple lookups for
+vertices are performed in the main loop. Space complexity is linear because
+a list for storing parents is introduced and its length depends on number of
+vertices. 
+
+Question 5
+A given position is counted from the end of the list therefore to calculate the
+relevant position of desired element a length of the list should be known. It is
+cheaper to store length in the separate variable and increase it on appending and
+decrease on deleting (however deleting is not required for solution here). If
+length is known then searching the desired element is just iterating of the list
+until needed position is reached.
+
+Complexity of linked list lookup is O(n) in the worst case, when near all elements
+of the list should be checked. Space complexity is O(1) because it does not depend
+on input and no new collections are introduced.
