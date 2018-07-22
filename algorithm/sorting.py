@@ -20,59 +20,7 @@ def bubble_sort(arr):
         n -= 1
     return arr
 
-
-def merge_sort(arr):
-    _len = len(arr)
-    _arrays = []
-    if _len % 2 != 0:
-        _len -= 1
-        _arrays = [[arr[0]]]
-    arr = arr[1:]
-    _arrays += [[arr[q-1], arr[q]] for q in range(1, _len, 2)]
-
-    for w in _arrays:
-        for x in range(1, len(w)):
-            if w[x-1] > w[x]:
-                swap(w, x - 1, x)
-
-    while len(_arrays) > 1:
-        new_arrays = []
-        for i in range(1, len(_arrays), 2):
-            a = copy.deepcopy(_arrays[i - 1])
-            b = copy.deepcopy(_arrays[i])
-            _len_a = len(a)
-            _len_b = len(b)
-            _len = max(_len_a, _len_b)
-            new_array = []
-            aj = None
-            bj = None
-            while _len_a + _len_b != len(new_array):
-                if len(a) > 0 and aj is None:
-                    aj = a.pop(0)
-                if len(b) > 0 and bj is None:
-                    bj = b.pop(0)
-
-                if aj or bj:
-                    if aj >= bj:
-                        if bj is None:
-                            new_array.append(aj)
-                            aj = None
-                        else:
-                            new_array.append(bj)
-                        bj = None
-
-                if aj or bj:
-                    if bj >= aj:
-                        if aj is None:
-                            new_array.append(bj)
-                            bj = None
-                        else:
-                            new_array.append(aj)
-                        aj = None
-            new_arrays.append(new_array)
-        _arrays = new_arrays
-    return _arrays[0]
-
+# Quick sort
 def quick_sort(A, lo, hi):
     if lo < hi:
         p = partition(A, lo, hi)
@@ -98,3 +46,39 @@ def partition(A, lo, hi):
             swap(A, i, j)
     swap(A, lo, j)
     return j
+
+# Mergesort recursive
+def _merge(a, aux, lo, mid, hi):
+    for k in range(lo, hi + 1):
+        aux[k] = a[k]
+
+    i = lo
+    j = mid + 1
+
+    for k in range(lo, hi + 1):
+        if i > mid:
+            a[k] = aux[j]
+            j += 1
+        elif j > hi:
+            a[k] = aux[i]
+            i += 1
+        elif aux[j] < aux[i]:
+            a[k] = aux[j]
+            j += 1
+        else:
+            a[k] = aux[i]
+            i += 1
+
+def _merge_sort_rec(a, aux, lo, hi):
+    if hi <= lo:
+        return
+    mid = lo + (hi - lo) / 2
+    _merge_sort_rec(a, aux, lo, mid)
+    _merge_sort_rec(a, aux, mid+1, hi)
+    _merge(a, aux, lo, mid, hi)
+
+def merge_sort(a):
+    aux = copy.deepcopy(a)
+    _merge_sort_rec(a, aux, 0, len(a) - 1)
+    return a
+
