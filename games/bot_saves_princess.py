@@ -1,3 +1,5 @@
+# see https://www.hackerrank.com/challenges/saveprincess2?hr_b=1
+
 def get_subject_coords(grid, subject):
     n = len(grid)
     for y in range(0, n):

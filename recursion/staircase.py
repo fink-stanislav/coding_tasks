@@ -1,4 +1,17 @@
 
+"""
+Consider a staircase of size n=4:
+
+   #
+  ##
+ ###
+####
+
+Observe that its base and height are both equal to n, and the image is drawn using # symbols and spaces.
+The last line is not preceded by any spaces.
+
+"""
+
 def count(n):
     if n == 0:
         return 1

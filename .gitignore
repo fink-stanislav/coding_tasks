@@ -2,3 +2,8 @@
 .project
 .pydevproject
 euler_env/*
+cci.ipynb
+.ipynb_checkpoints/*
+structures/test_resources/tries/*
+stackoverflow/*
+pramp/*
